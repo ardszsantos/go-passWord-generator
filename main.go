@@ -48,7 +48,6 @@ func menu() {
 func readDecision() int {
 	var menuDecision int
 	fmt.Scan(&menuDecision)
-	fmt.Println("Selected option: ", menuDecision)
 
 	return menuDecision
 }
@@ -63,7 +62,7 @@ func generatePassword(size int) string {
 		password[i] = charset[int(randomByte[0])%len(charset)]
 	}
 
-	fmt.Println("Generated password:", string(password), "\n", "saving it to saved_passwords.txt....")
+	fmt.Println("Generated password:", string(password), "\n", "Saving it to saved_passwords.txt....")
 
 	var file *os.File
 	if _, err := os.Stat("saved_passwords.txt"); os.IsNotExist(err) {
