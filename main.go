@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/rand"
 	"fmt"
 	"os"
 )
@@ -13,12 +14,14 @@ func main() {
 
 	switch decisao {
 	case 1:
+
 		var passwordLength int
 		fmt.Println("How long do you want the password to be? ")
 		fmt.Scan(&passwordLength)
 		fmt.Println("Selected size: ", passwordLength)
 		fmt.Println("")
 		fmt.Println("Generating...")
+		generatePassword(passwordLength)
 
 	case 2:
 
@@ -49,4 +52,19 @@ func readDecision() int {
 	fmt.Println("Selected option: ", menuDecision)
 
 	return menuDecision
+}
+
+func generatePassword(size int) string {
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	password := make([]byte, size)
+
+	for i := 0; i < size; i++ {
+		randomByte := make([]byte, 1)
+		rand.Read(randomByte)
+		password[i] = charset[int(randomByte[0])%len(charset)]
+	}
+
+	fmt.Println(string(password))
+
+	return string(password)
 }
