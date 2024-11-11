@@ -13,6 +13,5 @@ func menu() {
 	fmt.Println("Select the desired option: ")
 
 	var passwordLength int
-
-	resposta := fmt.Scan("How long do you want the password to be? ", &passwordLength)
+	fmt.Scan("How long do you want the password to be? ", &passwordLength)
 }
