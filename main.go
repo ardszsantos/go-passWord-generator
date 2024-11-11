@@ -65,10 +65,16 @@ func generatePassword(size int) string {
 
 	fmt.Println("Generated password:", string(password), "\n", "saving it to saved_passwords.txt....")
 
-	file, _ := os.Create("saved_passwords.txt")
+	var file *os.File
+	if _, err := os.Stat("saved_passwords.txt"); os.IsNotExist(err) {
+		file, _ = os.Create("saved_passwords.txt")
+	} else {
+		file, _ = os.OpenFile("saved_passwords.txt", os.O_APPEND|os.O_WRONLY, 0644)
+	}
 	defer file.Close()
-	file.WriteString(string(password) + "\n")
 
+	// Write the password followed by a newline
+	file.WriteString(string(password) + "\n")
 	return string(password)
 }
 
