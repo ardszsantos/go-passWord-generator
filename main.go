@@ -14,16 +14,20 @@ func main() {
 	switch decisao {
 	case 1:
 		var passwordLength int
-		fmt.Scan("How long do you want the password to be? ", &passwordLength)
+		fmt.Println("How long do you want the password to be? ")
+		fmt.Scan(&passwordLength)
+		fmt.Println("Selected size: ", passwordLength)
+		fmt.Println("")
+		fmt.Println("Generating...")
 
 	case 2:
-		fmt.Println("Exibindo Logs....")
+
 	case 3:
-		fmt.Println("Saindo do programa")
+		fmt.Println("Exiting. . . . . .")
 		os.Exit(0)
 
 	default:
-		fmt.Println("Não conheço este comando")
+		fmt.Println("Unkown Option. . . . . . .")
 		os.Exit(-1)
 	}
 }
@@ -42,7 +46,7 @@ func menu() {
 func readDecision() int {
 	var menuDecision int
 	fmt.Scan(&menuDecision)
-	fmt.Println("O comando escolhido foi", menuDecision)
+	fmt.Println("Selected option: ", menuDecision)
 
 	return menuDecision
 }
