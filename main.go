@@ -14,7 +14,6 @@ func main() {
 
 	switch decisao {
 	case 1:
-
 		var passwordLength int
 		fmt.Println("How long do you want the password to be? ")
 		fmt.Scan(&passwordLength)
@@ -24,7 +23,7 @@ func main() {
 		generatePassword(passwordLength)
 
 	case 2:
-
+		readPasswords()
 	case 3:
 		fmt.Println("Exiting. . . . . .")
 		os.Exit(0)
@@ -64,7 +63,17 @@ func generatePassword(size int) string {
 		password[i] = charset[int(randomByte[0])%len(charset)]
 	}
 
-	fmt.Println(string(password))
+	fmt.Println("Generated password:", string(password), "\n", "saving it to saved_passwords.txt....")
+
+	file, _ := os.Create("saved_passwords.txt")
+	defer file.Close()
+	file.WriteString(string(password) + "\n")
 
 	return string(password)
+}
+
+func readPasswords() {
+	data, _ := os.ReadFile("saved_passwords.txt")
+	fmt.Println("Saved passwords:")
+	fmt.Println(string(data))
 }
