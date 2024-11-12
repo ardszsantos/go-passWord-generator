@@ -92,6 +92,4 @@ func readPasswords() {
 		}
 	}
 
-	fmt.Println("Saved passwords: ")
-
 }
