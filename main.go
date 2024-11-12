@@ -4,33 +4,36 @@ import (
 	"crypto/rand"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
 	fmt.Println("************ Welcome to the CLI Password Generator ************")
-	menu()
+	for {
+		menu()
 
-	decisao := readDecision()
+		decisao := readDecision()
 
-	switch decisao {
-	case 1:
-		var passwordLength int
-		fmt.Println("How long do you want the password to be? ")
-		fmt.Scan(&passwordLength)
-		fmt.Println("Selected size: ", passwordLength)
-		fmt.Println("")
-		fmt.Println("Generating...")
-		generatePassword(passwordLength)
+		switch decisao {
+		case 1:
+			var passwordLength int
+			fmt.Println("How long do you want the password to be? ")
+			fmt.Scan(&passwordLength)
+			fmt.Println("Selected size: ", passwordLength)
+			fmt.Println("")
+			fmt.Println("Generating...")
+			generatePassword(passwordLength)
 
-	case 2:
-		readPasswords()
-	case 3:
-		fmt.Println("Exiting. . . . . .")
-		os.Exit(0)
+		case 2:
+			readPasswords()
+		case 3:
+			fmt.Println("Exiting. . . . . .")
+			os.Exit(0)
 
-	default:
-		fmt.Println("Unkown Option. . . . . . .")
-		os.Exit(-1)
+		default:
+			fmt.Println("Unkown Option. . . . . . .")
+			os.Exit(-1)
+		}
 	}
 }
 
@@ -79,6 +82,16 @@ func generatePassword(size int) string {
 
 func readPasswords() {
 	data, _ := os.ReadFile("saved_passwords.txt")
-	fmt.Println("Saved passwords:")
-	fmt.Println(string(data))
+	lines := strings.Split(string(data), "\n")
+	fmt.Println("Saved passwords: ")
+	fmt.Println("")
+	for _, line := range lines {
+		if line != "" {
+			fmt.Println(line)
+			fmt.Println("")
+		}
+	}
+
+	fmt.Println("Saved passwords: ")
+
 }
